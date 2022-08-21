@@ -1,0 +1,71 @@
+package com.cydeo.tests.day08_hamcrest;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class hamcrestMatchersIntro {
+    @Test
+    public void numbersTest() {
+        //MatcherAssert.assertThat(1+3,Matchers.is(4);
+        assertThat(1 + 3, is(4));
+        assertThat(5 + 5, equalTo(10));
+        assertThat(10 + 5, is(equalTo(15)));
+
+        assertThat(100 + 4, is(greaterThan(99)));
+
+
+    }
+
+    @Test
+    public void stringsTest() {
+        String word = "wooden spoon";
+        assertThat(word, is("wooden spoon"));
+        assertThat(word, equalTo("wooden spoon"));
+
+        //startsWith/endsWith
+        assertThat(word, startsWith("wood"));
+        assertThat(word, startsWithIgnoringCase("WOOD"));
+        assertThat("endsWith 'n'", word, endsWith("n"));
+
+        //contains
+        assertThat(word, containsString("den"));
+        assertThat(word, containsStringIgnoringCase("SPOON"));
+
+        //empty string
+        String str = " ";
+        assertThat(str, is(blankString()));
+        assertThat(str.replace(" ", ""), is(emptyOrNullString()));
+        assertThat(str.trim(), is(emptyOrNullString()));
+    }
+
+    @Test
+    public void listsTest() {
+        //    List<Integer> nums = List.of()(5,6,4,649,54);// from java 9
+        List<Integer> nums = Arrays.asList(5, 20, 1, 54, 0);
+        List<String> words = Arrays.asList("java", "selenium", "git", "maven", "api");
+
+        //size
+        assertThat(nums, hasSize(5));
+        assertThat(words, hasSize(5));
+
+        //contains
+        assertThat(nums, hasItem(5));
+        assertThat(words, hasItems("git", "maven"));
+        assertThat(nums,containsInAnyOrder(1, 20, 5, 54, 0));
+
+        // every item
+        assertThat(nums,everyItem(greaterThanOrEqualTo(0)));
+        assertThat(words,everyItem(not(blankString())));
+
+
+    }
+
+
+}
