@@ -1,10 +1,8 @@
 package com.cydeo.utils;
 
-import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 
 
@@ -16,7 +14,7 @@ import static org.hamcrest.MatcherAssert.*;
 
 public abstract class BookItApiTestBase {
     protected static RequestSpecification teacherReqSpec;
-    protected static ResponseSpecification teacherResSpec;
+    protected static ResponseSpecification responseSpec;
 
 
     @BeforeAll
@@ -30,7 +28,7 @@ public abstract class BookItApiTestBase {
                 .and().header("Authorization", teacherToken)
                 .log().all();
 
-        teacherResSpec=expect().statusCode(SC_OK)
+        responseSpec =expect().statusCode(SC_OK)
                 .and().contentType(JSON)
                 .logDetail(LogDetail.ALL);
 

@@ -1,8 +1,5 @@
 package com.cydeo.tests.day14_specifications;
 import static io.restassured.RestAssured.*;
-import static io.restassured.http.ContentType.JSON;
-import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.MatcherAssert.assertThat;
 import com.cydeo.utils.BookItApiTestBase;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +20,7 @@ public class BookItSpecTest extends BookItApiTestBase {
     public void test(){
         Map teacherMap = given().spec(teacherReqSpec)
                 .when().get("/api/teachers/me")
-                .then().spec(teacherResSpec)
+                .then().spec(responseSpec)
                 .and().extract().body().as(Map.class);
 
         Assertions.assertEquals(1816,teacherMap.get("id"));
